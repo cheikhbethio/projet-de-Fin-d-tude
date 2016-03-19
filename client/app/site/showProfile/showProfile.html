@@ -1,0 +1,45 @@
+
+<h2 class="page-header" style="margin-top: 0px;">Profil</h2>
+<div class= "media">
+	<div class="pull-left" style=" position: relative;">
+		<img class="thumbnail" src="{{currentUser.profilePicUrl()}}" style="width:150px; height:150px">
+
+	  	<button type="button" class="btn btn-primary" ng-click="editprofile()" ng-if='currentUser.isLoggedIn() && currentUser.currentUser()._id == user._id' style="position: absolute; right: 20px; top: 105px;">
+			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+		</button>	
+	</div>
+
+	 <div class="pull-right">
+	 	<h4>
+	 		<p><b>{{user.lastname}}  {{user.firstname}}</b></p>
+	 		<p>Email : {{user.email}}</p>
+	 	    <p>Statut: {{user_statut}}</p>
+	 </div>
+</div>
+
+<button type="button" class="btn btn-primary  pull-right" ng-click="editFavorite()" ng-if='currentUser.isLoggedIn() && currentUser.currentUser()._id == user._id'>
+		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Gestion favoris
+</button>
+
+<button class="btn btn-primary" type="button" ng-click="editprofile()" ng-if='currentUser.isLoggedIn() && currentUser.currentUser()._id == user._id'> <span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</button> <!-- ngif currentuserid != userid -->
+<hr>
+
+<div class="col-md-6" ng-if="user.right > 0">
+	   <h3>Articles</h3>
+            <div ng-repeat= "article in articles | orderBy:'article.date':true">
+		     <div class="well well-sm"> 
+ 			<p> Posté le {{article.date | date:'dd/MM/yyyy'}}
+ 			<a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
+			</div>
+		</div>
+</div>
+
+<div ng-class="{'col-md-12': user.right == 0, 'col-md-6': user.right > 0}">
+	<h3>Commentaires </h3>
+	<div ng-repeat= "comment in comments | orderBy:'comment.date':true">
+		<div class="well well-sm" >
+ 			<p> Posté le {{comment.date | date:'dd/MM/yyyy'}} <br/> sur <a ui-sref="site.showArticle({id : comment.article._id})"> {{comment.article.title}}</a></p><hr>
+ 			<p> {{comment.content}}</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" ng-app="myWordPress">
+<head>
+
+	<meta charset="utf-8">
+	<title>MyWordPress</title>
+
+	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">	
+	<link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="site/siteTemplate/blog.css" rel="stylesheet">
+	<link href="dashboard/dashboardTemplate/dashboard.css" rel="stylesheet">
+
+	<link rel='stylesheet' href='bower_components/textAngular/src/textAngular.css'>
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css">
+	<link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css">
+	<link rel="stylesheet" href="bower_components/jquery-minicolors/jquery.minicolors.css" >
+	<link rel="stylesheet" href="bower_components/angular-dialog-service/dist/dialogs.min.css">
+
+</head>
+<body>
+	 <div ui-view="header"></div>
+
+     <div ui-view="content" ng-style="{ 'background-color': preferences.site.backgroundcolor }"></div>
+
+     <div ui-view="footer"></div>
+
+	
+	<!-- BOWER/LIBS -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-contenteditable/angular-contenteditable.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.js"></script>
+	<script src="bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+	<script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+	<script src='bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
+	<script src='bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+	<script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+	<script src="bower_components/snapjs/snap.js"></script>
+	<script src="bower_components/angular-snap/angular-snap.js"></script>
+	<script src='bower_components/ngToast/dist/ngToast.js'></script>
+	<script src='bower_components/jquery-minicolors/jquery.minicolors.js'></script>
+	<script src='bower_components/angular-minicolors/angular-minicolors.js'></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src='bower_components/angular-dialog-service/dist/dialogs.min.js'></script>
+	<script src='bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js'></script>
+
+	<!-- APP -->
+	<script src="app.js"></script>
+
+	<!-- SITE -->
+	<script src="site/registration/registration.js"></script>
+	<script src="site/siteTemplate/siteTemplate.js"></script>
+	<script src="site/connection/connection.js"></script>
+	<script src="site/editProfile/editProfile.js"></script>
+	<script src="site/pages/pages.js"></script>
+	<script src="site/articles/articles.js"></script>
+	<script src="site/home/home.js"></script>
+	<script src="site/search/keyword.js"></script>
+	<script src="site/showProfile/showProfile.js"></script>
+	<script src="site/favorite/favorite.js"></script>
+
+	<!-- DASHBOARD -->
+	<script src="dashboard/dashboardTemplate/dashboardTemplate.js"></script>
+	<script src="dashboard/adminPage/adminPage.js"></script>
+	<script src="dashboard/adminPage/editPage.js"></script>
+	<script src="dashboard/articles/articles.js"></script>
+	<script src="dashboard/home/home.js"></script>
+	<script src="dashboard/sitePreferences/sitePreferences.js"></script>
+	<script src="dashboard/menu/menu.js"></script>
+	<script src="dashboard/listeMembre/listMember.js"></script>
+	<script src="dashboard/statistiques/statistiques.js"></script>
+
+
+
+	<!-- components -->
+	<script src="components/registration/registration-directive.js"></script>
+	<script src="components/siteTemplate/siteTemplate-directive.js"></script>
+	<script src="components/services/user.js"></script>
+	<script src="components/services/page.js"></script>
+	<script src="components/services/login.js"></script>
+	<script src="components/services/article.js"></script>
+	<script src="components/services/pageArticle.js"></script>
+	<script src="components/services/comment.js"></script>
+	<script src="components/services/token.js"></script>
+	<script src="components/services/menu.js"></script>
+	<script src="components/preferences/preferences-service.js"></script>
+	<script src="components/services/searchKeyWord.js"></script>
+	<script src="components/services/lastArticles.js"></script>
+	<script src="components/services/lastComments.js"></script>
+	<script src="components/services/statistics.js"></script>
+	<script src="components/services/currentUser.js"></script>
+
+	<script src="components/services/favorite.js"></script>
+	<script src="components/services/profil.js"></script> 
+	<script src="components/services/right.js"></script> 
+
+
+</body>
+</html>

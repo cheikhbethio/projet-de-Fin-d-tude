@@ -1,0 +1,48 @@
+
+<div ng-style="{ 'background-color': preferences.site.bannercolor }" class="blog-masthead" id="top-scroll" name="top">
+    <div class="container">
+        <div class="navbar-header navbar-default blog-masthead ">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-col" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
+            <a ng-class="{ active: isActiveHeader('site.home')}" class="blog-nav-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
+        </nav>
+
+        <div ng-hide="isUserConnected()" >
+            <nav ng-style="{ 'background-color': preferences.site.bannercolor }" class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+                <a ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" >Connexion</a>
+                <a ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" >Inscription</a>
+            </nav>
+        </div>
+
+        <div ng-show="isUserConnected()">
+            <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+                <div class="blog-nav-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bienvenue <strong>{{currentUser.firstname}} {{currentUser.lastname}}</strong></div>
+                <a ng-class="{ active: isActiveHeader('site.editprofile')}" class="blog-nav-item" ui-sref="site.editprofile"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Profil</a>
+                <a class="blog-nav-item" href="javascript:void(0)"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Se déconnecter</a>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container" class="scrollable" ng-style="{ 'background-color': preferences.site.backgroundcolor }">
+
+    <div class="blog-header">
+
+    <h1 class="blog-title" ng-style="{ 'color': preferences.site.titlecolor }">{{ preferences.site.title }}</h1>
+
+    <p ng-style="{ 'color': preferences.site.subtitlecolor }" class="lead blog-description">{{ preferences.site.subtitle }}</p>
+
+    </div>
+
+    <div class="row">
+
+    </div>
+
+</div>

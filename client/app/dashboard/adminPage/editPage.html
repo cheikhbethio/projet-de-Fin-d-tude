@@ -1,0 +1,99 @@
+<h2 class="page-header"> Titre: {{page.title}} </h2>
+
+<div ng-if="user.getRight() == 3 && page.title != 'home'">
+  <label ng-hide="isEdit == true"> Modifiez le titre de la page :</label>
+  <input type="text" ng-show="isEdit== true" ng-model="editTitle" />
+
+  <button type="button"
+  class="btn btn-primary btn-sm"
+  ng-click="switchEdit(true)"
+  ng-hide="isEdit == true">
+    <span class="glyphicon glyphicon-pencil"></span>
+  </button>
+
+  <button type="button" 
+  class="btn btn-primary"
+  ng-click="valid()"
+  ng-show="isEdit == true">
+   Enregistrer
+  </button>
+
+  <button type="button"
+  class="btn btn-danger"
+  ng-click="switchEdit(false)"
+  ng-show="isEdit == true">
+    Annuler
+  </button>
+</div>
+<br/>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Date de rédaction</th>
+      <th>Mots clés</th>
+      <th>Publié</th>
+      <th style="width:187px">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="article in page.content">
+      <td><a ui-sref="dashboard.showArticle({id : article._id})">{{article.title}}</a></td>
+      <td>{{article.author.firstname}} {{article.author.lastname}}</td>
+      <td>{{article.date | date:'dd/MM/yyyy'}}</td>
+      <td class="row"><div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div> </td>
+      <td>
+        <span ng-hide="{{article.ispublic}}" class="glyphicon glyphicon-remove" style="color:red" aria-hidden="true"></span>
+        <span ng-show="{{article.ispublic}}" class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true"></span>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" ng-click="delArticle(article._id)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Supprimer de la page</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<button type="button"
+  class="btn btn-primary"
+  ng-click="modeArticle(true)"
+  ng-hide="boolArticle == true">
+    <span class="glyphicon glyphicon-plus"></span> Ajouter un article à la page
+</button>
+<button type="button"
+  class="btn btn-primary"
+  ng-click="modeArticle(false)"
+  ng-show="boolArticle == true">
+    <span class="glyphicon glyphicon-minus"></span> Cacher la liste des articles disponibles
+</button>
+<br/><br/>
+<table class="table table-bordered" ng-show="boolArticle==true">
+  <thead>
+    <tr>
+      <th>Titre</th>      
+      <th>Mots clés</th>
+      <th style="width:187px">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="article in articles" ng-if="article.ispublic">
+      <td><a ui-sref="dashboard.showArticle({id : article._id})">{{article.title}}</a></td>
+      <td>{{article.author.firstname}} {{article.author.lastname}}</td>
+      <td>{{article.date | date:'dd/MM/yyyy'}}</td>
+      <td class="row"><div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div> </td>
+      <td>
+        <span ng-hide="{{article.ispublic}}" class="glyphicon glyphicon-remove" style="color:red" aria-hidden="true"></span>
+        <span ng-show="{{article.ispublic}}" class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true"></span>
+      </td>
+      <td>
+        <button class="btn btn-primary btn-sm" ng-click="addArticle(article._id, article)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a ui-sref="dashboard.adminPage" class="btn btn-default">Retour</a>
+
+<br/><br/>
+

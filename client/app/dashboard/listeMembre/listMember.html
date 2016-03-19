@@ -1,0 +1,65 @@
+<h2 class="page-header">Liste des Membres</h2>
+
+<toast></toast>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Login (lien profil)</th>
+			<th>Prénom</th>
+			<th>Nom</th>
+			<th style="width:150px"><span> Droit</span></th>
+			<th style="width:300px"><span class="pull-right">Changer le droit</span></th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr ng-repeat="user in users | orderBy:rights[user.right].name" ng-if="currentUser.getId() != user._id">
+
+			<td>
+				<a target="_blank" ui-sref="site.showprofile({id: user._id})">{{user.login}}</a>
+			</td>
+
+			<td>
+				{{user.firstname}} 
+			</td>
+
+			<td>
+				{{user.lastname}}
+			</td>
+
+			<td>
+				<div class="pull-left">
+					<span class="pull-left"><span class="glyphicon" ng-class="{'glyphicon-user': user.right == 0, 'glyphicon-edit': user.right == 1, 'glyphicon-king': user.right==3}" aria-hidden="true"></span> {{ rights[user.right].name }} </span>
+				</div>
+
+			</td>
+
+			<td>
+
+				<button type="button" ng-hide="editedUser == user" class="btn btn-primary pull-right" ng-click="setEditUserMode(user)">	
+  					 <span class="glyphicon glyphicon-pencil pull-right"></span>    				
+  				</button>
+
+				<form ng-model="selected" ng-show="editedUser == user">
+
+					<div class="form-group input-group pull-right">
+						<select ng-init="selectedRight = selectedRight || rights[user.right]" class="form-control" ng-model="selectedRight" ng-options="right as right.name for right in rights | filter:{ name : '!Moderateur' }"/>
+						<span class="input-group-btn">
+				 			<button class="btn btn-success" type="submit" ng-click="saveUserRight(selectedRight)">
+				 				<span class="glyphicon glyphicon-ok"></span>
+				 			</button>
+				 			<button class="btn btn-danger" type="submit" ng-click="setEditUserMode(false);selectedRight = rights[user.right]">
+				 				<span class="glyphicon glyphicon-remove"></span>
+				 			</button>
+				 		</span>
+					</div>
+
+				</form>
+
+			</td>
+
+		</tr>
+
+	<tbody>
+</table>

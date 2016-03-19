@@ -1,0 +1,30 @@
+<div class="col-sm-3 blog-sidebar">
+    <div class="sidebar-module sidebar-module-inset">
+        <h4>{{ preferences.apropos.title}} </h4>
+        <p>{{ preferences.apropos.content}}</p>
+    </div>
+
+    <div class="sidebar-module">
+        <h4><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Recherche par mot clé:</h4>
+        <form name="SearchArticleForm">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" name="searchkeyword" type="text" id="searchkeyword" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list=",">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" ng-click="search(keywords)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
+        </form>
+    </div>
+
+    <div class="sidebar-module">
+        <h4>Ailleurs sur le web</h4>
+        <ol class="list-unstyled" >
+            <li ng-repeat="link in preferences.links">
+                <a target="_blank" href="{{link.url}}">{{ link.text }}</a>
+            </li>
+        </ol>
+
+    </div>
+</div><!-- /.blog-sidebar -->

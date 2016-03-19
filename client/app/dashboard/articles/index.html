@@ -1,0 +1,91 @@
+<h2 class="page-header">Gestion des articles</h2>
+
+<form class="form pull-right" role="form">
+	<div class="form-group">
+	    <label for="page_search">Chercher parmis les articles du site: </label>
+	    <input id="page_search" type="text" class="form-control" ng-model="articleSearchText" placeholder="Votre recherche">
+	</div>
+</form>
+
+<a class="btn btn-primary" ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un article</a>
+<br/>
+<br/>
+<br />
+
+<alert type="success" ng-if="success" close="closeAlert()">
+	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Votre article a bien été créé. N'oubliez pas de <a ui-sref='dashboard.adminPage'>l'ajouter dans une page ! </a></alert>
+<alert type="success" ng-if="editSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Votre article a bien été modifié.</alert>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			
+			<th>
+				<span class="glyphicon glyphicon-tower pull-left" style="margin-right: 7px;"></span>
+				<span class="pull-left">Titre</span>
+			</th>
+
+			<th>
+				<span class="glyphicon glyphicon-user pull-left" style="margin-right: 7px;"></span>
+				<span class="pull-left">Auteur</span>
+			</th>
+
+			<th>
+				<span class="glyphicon glyphicon-tags pull-left" style="margin-right: 7px;"></span>
+				<span class="pull-left">Mots clés</span>
+			</th>
+
+			<th style="width:160px">
+				<span class="pull-right">Date de rédaction</span>
+				<span class="glyphicon glyphicon-calendar pull-right" style="margin-right: 5px;"></span>
+			</th>
+
+			<th style="width:100px">
+				<span class="pull-right">Publié</span>
+				<span class="glyphicon glyphicon-globe pull-right" style="margin-right: 5px;"></span>
+			</th>
+
+			<th style="width:180px">
+				<span class="pull-right">Actions</span>
+				<span class="glyphicon glyphicon-cog pull-right" style="margin-right: 5px;"></span>
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="article in articles | filter:articleSearchText ">
+
+			<td>
+				<a ui-sref="dashboard.showArticle({id : article._id})">{{article.title}}</a>
+			</td>
+
+			<td>{{article.author.firstname}} {{article.author.lastname}}</td>
+
+			<td class="row">
+				<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div> 
+			</td>
+
+			<td style="text-align:center">
+				{{article.date | date:'dd/MM/yyyy'}}
+			</td>
+
+			<td>
+				<span ng-hide="{{article.ispublic}}"  style="margin-right: 15px; color:red;" class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
+
+				<span ng-show="{{article.ispublic}}"  style="margin-right: 15px; color:green;" class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+
+			</td>
+
+			<td>
+				<button class="btn btn-danger btn-sm pull-right" ng-click="deleteArticle($index)">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				</button>
+
+				<a ui-sref="dashboard.editArticle({id : article._id})" class="btn btn-info btn-sm pull-right" style="margin-right: 5px"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> Modifier</span>
+				</a>
+			</td>
+
+			
+		</tr>
+	</tbody>
+</table>

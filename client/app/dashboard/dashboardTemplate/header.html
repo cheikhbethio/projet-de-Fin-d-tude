@@ -1,0 +1,24 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <button snap-toggle="left" class="btn btn-primary navbar-btn pull-left" style="margin-right:15px;">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> 
+            </button>
+            <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> DashBoard</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text"><img src="{{user.profilePicUrl()}}" class="headerPic"> Bienvenue <strong>{{user.currentUser().firstname}}</strong></p></li>
+                <li><a ui-sref="site.home"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Retour au site</a></li>
+                <li ng-if="user.getRight() == 3"><a snap-close ui-sref="dashboard.preferences"><span class="glyphicon glyphicon-wrench" aria-hidden="true" ></span> Préférences</a></li>
+                <li><a ui-sref="site.showprofile({id : user.currentUser()._id})"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Profil</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

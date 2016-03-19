@@ -1,0 +1,83 @@
+<!-- Mini DashBoard -->
+
+<div ng-if="user.isLoggedIn() && user.getRight() > 0" style="padding-bottom: 50px;"> 
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Mini-DashBoard</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left" ng-if="user.getRight() == 3">
+                    <li><a ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Rédiger un article</a></li>
+                    <li><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Créer une page</a></li>
+                    <li><a ui-sref="dashboard.indexMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Modifier le menu</a></li>
+                    <li><a ui-sref="dashboard.listMember"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gérer les droits </a></li>
+                    <li><a ui-sref="dashboard.statistiques"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Statistiques</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-left" ng-if="user.getRight() == 1">
+                    <li><a ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Rédiger un article</a></li>
+                    <li><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Ajouter un article dans une page</a></li>
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="dashboard.home"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Aller au Dashboard</a></li>
+                    <li ng-if="user.getRight() == 3"><a ui-sref="dashboard.preferences"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Préférences</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Aide</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!-- Head du Blog classique -->
+
+<div class="blog-masthead" id="top-scroll" name="top" ng-style="{ 'background-color': preferences.site.bannercolor }">
+   <div class="container">
+    <div class="navbar-header navbar-default blog-masthead ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-col" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
+        <a ng-class="{ active: isActiveHome('home')}" class="blog-nav-item" ui-sref="site.home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
+        <span ng-repeat="menu in menus">
+            <span ng-if="menu.single">
+                <a ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : menu.page})"> {{menu.name}}</a>
+            </span>
+            <span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
+                <a href class="dropdown-toggle blog-nav-item" dropdown-toggle ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}">
+                    {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;" ng-style="{ 'background-color': preferences.site.bannercolor }">
+                    <li ng-repeat="drop in menu.dropdown"s>
+                        <a ng-class="{ activeDrop: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item drop" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
+                    </li>
+                </ul>
+            </span>
+        </span>
+    </nav>
+    <div ng-hide="user.isLoggedIn()" >
+        <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+            <a id="connection_link" ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Connexion</a>
+            <a id="header_registration_link" ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" ui-sref="site.registration"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Inscription</a>
+        </nav>
+    </div>
+    <div ng-show="user.isLoggedIn() ">
+        <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+            <a class="blog-nav-item" ng-class="{ active: isActiveHeader('site.showprofile')}" ui-sref="site.showprofile({id : user.currentUser()._id})"><img src="{{user.profilePicUrl()}}" class="headerPic">Bienvenue <strong>{{user.currentUser().firstname;}}</strong></a>
+            <a class="blog-nav-item" href="javascript:void(0)" ng-click="logOut()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnection</a>
+        </nav>
+    </div>
+</div>
+</div>

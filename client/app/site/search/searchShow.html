@@ -1,0 +1,20 @@
+<h2 class="page-header" style="margin-top: 0px;"> Résultat de la recherche: {{search}}</h2>
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>Titre</th>
+			<th>Auteur</th>
+			<th>Date de rédaction</th>
+			<th>Mots clés</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="article in articles">
+			<td><a ui-sref="site.showArticle({id : article._id})">{{article.title}}</a></td>
+			<td>{{article.author.firstname}} {{article.author.lastname}}</td>
+			<td>{{article.date | date:'dd/MM/yyyy'}}</td>
+			<td class="row"><div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div> </td>
+		</tr>
+	</tbody>
+</table>

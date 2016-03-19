@@ -1,0 +1,23 @@
+<h2 class="page-header" style="margin-top: 0px;">Gestion des Favoris</h2>
+
+<br/>
+<br/>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</th>
+			<th><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Auteur</th>
+			<th style="width:187px"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="fav in favorite">
+			<td><a ui-sref="site.showArticle({id : fav._id})">{{fav.title}}</a></td>
+			<td>{{fav.author.firstname}} {{fav.author.lastname}}</td>
+			<td>
+				<button class="btn btn-danger btn-sm" ng-click="deleteFavorite(fav._id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

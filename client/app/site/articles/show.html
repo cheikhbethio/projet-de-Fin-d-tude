@@ -1,0 +1,62 @@
+
+<div class="blog-post">
+    <h2 class="blog-post-title">{{article.title}}
+
+
+    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="pushFavoris(article._id)" ng-if="!isFavorite">
+
+  			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
+
+		</button>
+
+    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="popFavoris(article._id)" ng-if="isFavorite">
+
+  			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
+
+		</button>
+    </h2>
+    <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a ui-sref="site.showprofile({id : article.author._id})">{{article.author.firstname}} {{article.author.lastname}}</a></p>
+
+    <div ng-bind-html="article.content"></div>
+
+    <hr>
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
+    <div>
+   		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+	</div>
+	<hr>
+
+  <div ng-if="isUserConnected()">
+    <button type="button"
+      class="btn btn-primary"
+      ng-click="modeFormulaire(true)"
+      ng-hide="boolformulaire == true">
+        <span class="glyphicon glyphicon-plus"></span> Ajouter un Commentaire
+    </button>
+    <button type="button"
+      class="btn btn-primary"
+      ng-click="modeFormulaire(false)"
+      ng-show="boolformulaire== true">
+        <span class="glyphicon glyphicon-minus"></span> Cacher le formulaire d'ajout de commentaires
+    </button>
+    <br/><br/>
+</div>
+
+  <form name ="createCommentForm" ng-show="boolformulaire">
+  	<div class="form-group" >
+  		<label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Laisser un commentaire en tant que {{user.currentUser().firstname}} {{user.currentUser().lastname}}</label><br/>
+      <textarea cols="55" rows="6" ng-model="comment.content" required></textarea>
+    </div>
+    <button class="btn btn-primary pull-left" ng-click="addComment()">Commenter</button>
+    <br/>
+  </form>
+
+  <h3 class="page-header" name="comments">Tous les commentaires</h3>
+  <div class="aricle-comment well well-sm" ng-repeat = "comment in commentList | orderBy:'date':true">
+      <img src="{{user.profilePicUrl()}}" class="pull-left" style="height:40px; border: 3px solid #fff; margin-right: 5px">
+      <p class="blog-post-meta"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> </span> Posté le {{comment.date | date:'dd/MM/yyyy'}} par <a  ui-sref="site.showprofile({id : comment.author._id})">{{comment.author.firstname}} {{comment.author.lastname}}</a></p>
+      <hr>
+      <p>{{comment.content}}</p>
+
+  </div>
+</div>

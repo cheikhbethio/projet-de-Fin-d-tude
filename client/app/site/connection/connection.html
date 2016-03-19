@@ -1,0 +1,26 @@
+<h2 class="page-header" style="margin-top: 0px;">Se connecter</h2>
+
+
+<alert type="success" ng-show="registration" close="closeAlert()"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Merci pour votre inscription ! Maintenant, connectez vous :)</alert>
+
+
+<alert type="danger" ng-show="connectionError" close="closeAlert()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Echec de la connexion. Vérifiez votre identifiant et/ou votre mot de passe.</alert>
+
+
+<form name="connectionForm" novalidate>
+    
+    <div class="form-group input-group" show-errors='{ showSuccess: true }'>
+    	<span for="login" class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+        <input type="text" class="form-control" name="login" placeholder="Entrez votre login" ng-model="userCredentials.login" required>
+    </div>
+    
+    <div class="form-group input-group" show-errors='{ showSuccess: true }'>
+    	<span for="password" class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
+        <input type="password" class="form-control" name="password" placeholder="Entrez votre mot de passe" ng-model="userCredentials.password" required>
+    </div>
+    
+    <button id="connection_button" class="btn btn-primary" ng-click="connectUser()">Se connecter</button>
+</form>
+         
+<br/>
+<div>Pas de compte? <a id='account_creation_link' ui-sref="site.registration">Créez en un maintenant !</a></div>

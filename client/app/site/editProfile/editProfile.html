@@ -1,0 +1,59 @@
+<h2 class="page-header" style="margin-top: 0px;">Edition du profil</h2>
+
+
+<div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Information</th>
+            <th>Valeur</th>
+            <th><span class="pull-right">Editer</span></th>
+          </tr>
+        </thead>
+
+        <tbody ng-repeat="(key, value) in keysToValues">
+
+            <td>
+              <p>{{ value }}</p>
+            </td>
+
+            <td>
+              <p ng-hide="isEditMode($index) == true"> {{ filterPassword(key) }}</p>
+              <input type="text" ng-show="isEditMode($index) == true" ng-model="profile[key]" />
+            </td>
+            <td>
+
+              <button type="button" 
+                      class="btn btn-primary btn-sm pull-right"
+                      ng-click="editInformation($index, key)"
+                      ng-hide="isEditMode($index) == true"
+                      ng-disabled="edit_index != $index && editMode == true"
+                      >
+                       <span class="glyphicon glyphicon-pencil"></span>
+              </button>
+              <button type="button" 
+                      class="btn btn-danger btn-sm pull-right"
+                      ng-click="cancelEditInformation(key)"
+                      ng-show="isEditMode($index) == true">
+                      Annuler
+              </button>
+              <button type="button" 
+                      class="btn btn-primary btn-sm pull-right"
+                      ng-click="saveEditInformation()"
+                      ng-show="isEditMode($index) == true">
+                      Sauvegarder
+              </button>
+            </td>
+
+        </tbody>
+      </table>
+
+      <button class="btn btn-success" ng-click="saveUser()">Sauvegarder les changements</button>
+      </div>
+    </div>
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+<div class="modal-header">
+	<h4 class="modal-title"><span class="glyphicon glyphicon-star"></span> Création d'une nouvelle page</h4>
+</div>
+
+<div class="modal-body">
+
+	<form name="nameDialog" novalidate role="form">
+		<div class="form-group input-group-lg" ng-class="{true: 'has-error'}[nameDialog.username.$dirty && nameDialog.username.$invalid]">
+
+			<label class="control-label" for="course">Titre de la nouvelle page:</label>
+			<input type="text" class="form-control" placeholder="Titre de la page" name="username" id="username" ng-model="title" ng-keyup="hitEnter($event)" required>
+		</div>
+	</form>
+
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" ng-click="cancel()">Annuler</button>
+	<button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="(nameDialog.$dirty && nameDialog.$invalid) || nameDialog.$pristine">Ajouter</button>
+</div>

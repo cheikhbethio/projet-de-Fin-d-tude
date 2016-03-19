@@ -1,0 +1,142 @@
+<h2 class="page-header" style="margin-top: 0px;">Formulaire d'inscription</h2>
+
+<form name="registrationForm" novalidate>
+
+<alert type="danger" ng-show="invalidForm" close="closeAlert()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Echec de l'inscription. Vérifiez que vous avez bien renseigné tous les champs et que les mots de passes sont identiques. Si c'est le cas, votre identifiant ou adresse email est déjà utilisé.</alert>
+
+	<div class="form-group input-group" ng-class="{ 'has-error': $scope.noLastName }">
+		<span for="lastname" class="input-group-addon"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></span>
+		<input id="input_lastname" 
+			type="text"  
+			name="lastname" 
+			class="form-control"  
+			ng-model="newUser.lastName" 
+			placeholder="Nom"
+			required
+		/>
+	</div>
+
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
+		<span for="firstname" class="input-group-addon"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></span>
+		<input id="input_firstname" 
+			type="text" 
+			name="firstname" 
+			class="form-control"  
+			ng-model="newUser.firstName" 
+			placeholder="Prenom" 
+			required
+		/>
+	</div>
+
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.login.$invalid && registrationForm.login.$dirty }">
+    	<span for="login" class="input-group-addon" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+		<input id="input_login" 
+			type="text" 
+			name="login" 
+			class="form-control"
+			ng-model="newUser.login" 
+			placeholder="Login" 
+			required
+		/>
+		<p ng-show="loginAlreadyUsed" class="input-group-addon">Login déjà utilisé</p>
+	</div>
+
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.email.$invalid && registrationForm.email.$dirty }">
+		<span for="email" class="input-group-addon"><b>@</b></span>
+		<input id="input_email"
+			type="email"
+			name="email"
+			class="form-control"
+			ng-model="newUser.email"
+			placeholder="Email"
+			required
+		/>
+		<p class="help-block input-group-addon" ng-if="registrationForm.email.$error.email">Adresse mail invalide</p>
+		<p class="input-group-addon"ng-show="emailAlreadyUsed">Email déjà utilisé</p>
+	</div>
+
+	<div class="form-group input-group-addon">
+    	<span for="password" class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
+		<input id="input_password"
+		type="password"
+		class="form-control"
+		name="password"
+		placeholder="Mot de passe" 
+		ng-model="newUser.password" />
+	</div>
+
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.passwordConfirmation.$invalid}">
+		 <span for="passwordConfirmation" class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
+		<input id="input_passwordConfirmation"
+		type="password"
+		name="passwordConfirmation"
+		class="form-control"
+		ng-model="newUser.passwordConfirmation"
+		placeholder="Confirmation du mot de passe" 
+		password-validate="newUser.password"/>
+	</div>
+
+	<p ng-show="nonMatchingPwd">Les mot de passes ne sont pas identiques.</p>
+
+	<button class="btn btn-primary" ng-click="saveNewUser(newUser)">Valider</button>
+	<button class="btn btn-link" ng-click="resetRegistrationForm()">Vider les champs</button>
+
+
+</form>
+
+	
+	<!-- <div class="form-group" ng-class="{ 'has-error': registrationForm.email.$invalid && registrationForm.email.$dirty }"> -->
+
+
+	<!-- <form name="registrationForm" novalidate>
+
+		<div class="form-group" show-errors='{ showSuccess: true }'>
+			<label for="lastname">Nom:</label>
+			<input id="input_lastname" type="text"  name="lastname" class="form-control"  ng-model="newUser.lastName" placeholder="Nom" required />
+		</div>
+
+		<div class="form-group" show-errors='{ showSuccess: true }'>
+			<label for="firstname">Prenom:</label>
+			<input id="input_firstname" type="text" name="firstname" class="form-control"  ng-model="newUser.firstName" placeholder="Prenom" required />
+		</div>
+
+		<div class="form-group" show-errors='{ showSuccess: true }'>
+			<label for="login">Login:</label>
+			<input id="input_login" type="text" name="login" class="form-control"  ng-model="newUser.login" placeholder="Login" required />
+		</div>
+
+		<div class="form-group" show-errors='{ showSuccess: true }'>
+			<label for="email">Email:</label>
+			<input id="input_email"
+				type="email"
+				name="email"
+				class="form-control"
+				ng-model="newUser.email"
+				placeholder="Email"
+				required 
+			/>
+        	<p class="help-block" ng-if="registrationForm.email.$error.email">Adresse mail invalid</p>
+		</div>
+
+		<div class="form-group" >
+			<label for="password">Mot de passe:</label>
+			<input id="input_password" type="password" name="password" class="form-control" ng-model="newUser.password" placeholder="Mot de passe" required />
+
+		</div>
+
+		<div class="form-group" >
+			<label for="passwordConfirmation">Confirmation du mot de passe:</label>
+			<input id="input_passwordConfirmation" 
+				type="password" 
+				name="passwordConfirmation" 
+				class="form-control" 
+				placeholder="Mot de passe" 
+				ng-model="newUser.passwordConfirmation"
+				required>
+		</div>
+
+		<p ng-show="nonMatchingPwd">Les mot de passes ne sont pas identiques.</p> 
+
+		<button class="btn btn-default" ng-click="saveNewUser(newUser)">Submit</button>
+		<button class="btn btn-link" ng-click="resetRegistrationForm()">Reset</button>
+	</form> -->

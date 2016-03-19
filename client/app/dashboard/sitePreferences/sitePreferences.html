@@ -1,0 +1,178 @@
+<h2 class="page-header" >Preferences du site</h2>
+
+<!-- Prefs: {{ preferences | json}} -->
+
+
+
+<!-- Apercu -->
+
+<h2 class="page-header"> Apercu </h2>
+
+<div class="row">
+
+	<div class="col-md-6">
+	<form class="form-inline" style="margin-bottom: 15px;" role="form">
+
+		<label for="bg_color">Couleur de fond: </label>
+		<div class="form-group">
+			<input minicolors id="bg_color" type="text" class="form-control" ng-model="preferences.site.backgroundcolor">
+		</div>
+
+	</form>
+	</div>
+
+	<div class="col-md-6">
+	<form class="form-inline" style="margin-bottom: 15px;" role="form">
+
+		<label for="banner_color">Couleur de la banière: </label>
+		<div class="form-group">
+			<input minicolors id="banner_color" type="text" class="form-control" ng-model="preferences.site.bannercolor">
+		</div>
+
+	</form>
+	</div>
+
+	<button style="margin-top: 15px;margin-left: 15px;" type="submit" class="btn btn-primary" ng-click="savePreferences()">Sauvegarder</button>
+</div>
+
+<hr>
+
+<div id="div_peek" class="well" >
+	<div ng-style="{ 'background-color': preferences.site.backgroundcolor }" style="background-color: white" ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
+</div>
+
+<hr>
+
+<toast></toast>
+
+<div class="row">
+
+	<div class="col-md-6">
+		<h2 class="page-header">Titre</h2>
+		<form role="form">
+
+			<label for="title_title">Titre du site: </label>
+			<div class="form-group">
+				<input id="title_title" type="text" class="form-control" ng-model="preferences.site.title">
+			</div>
+
+			<label for="title_color">Couleur du titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>		
+			<div class="form-group">
+				<!-- <input colorpicker colorpicker-position="top" id="title_color" class="form-control" ng-style="{'color': preferences.site.titlecolor}" ng-model="preferences.site.titlecolor" type="text"> -->
+				
+				<input minicolors id="title_color" class="form-control" ng-style="{'color': preferences.site.titlecolor}" ng-model="preferences.site.titlecolor" >
+
+			</div>
+
+			
+			<button style="margin-top: 15px;" type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
+
+		</form>
+	</div>
+
+	<div class="col-md-6">
+		<h2 class="page-header">Sous titre</h2>
+		<form role="form">
+			
+			<label for="subtitle_title">Sous titre du site: </label>
+			<div class="form-group">
+				<input id="subtitle_title" type="text" class="form-control" ng-model="preferences.site.subtitle">
+			</div>
+
+			<label for="subtitle_color">Couleur du sous titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
+			<div class="form-group">
+				<!-- <input colorpicker id="subtitle_color" class="form-control" ng-model="preferences.site.subtitlecolor" type="text" /> -->
+
+				<input minicolors id="subtitle_color" class="form-control" ng-style="{'color': preferences.site.subtitlecolor}" ng-model="preferences.site.subtitlecolor">
+			</div>
+
+			
+
+			<button style="margin-top: 15px;" type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
+			
+		</form>
+	</div>
+</div>
+
+
+
+<div class="row">
+<div class="col-md-6">
+	<h2 class="page-header">A propos</h2>
+	<form role="form">
+
+	<div class="form-group">
+		<label for="apropos_title">Titre</label>
+		<input id="apropos_title" type="text" class="form-control" ng-model="preferences.apropos.title">
+	</div>
+
+	<div class="form-group">
+		<label for="apropos_content">Text</label>
+		<textarea id="apropos_content" class="form-control" rows="5" ng-model="preferences.apropos.content"></textarea>
+
+	</div>
+
+	<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
+
+	</form> 
+
+</div>
+
+
+<div class="col-md-6">
+	<h2 class="page-header">Liens</h2>
+
+	    <table class="table">
+
+		    <thead>
+		      <tr>
+		        <th>Text</th>
+		        <th>Link</th>
+		        <th><span class="pull-right">Supprimer</span></th>
+		      </tr>
+		    </thead>
+
+        <tbody ng-repeat="link in preferences.links">
+
+            <td>
+              <p>{{ link.text }}</p>
+            </td>
+
+            <td>
+              <p>{{ link.url }}</p>
+            </td>
+            <td>
+	            <button type="button" 
+	                      class="btn btn-danger btn-sm pull-right"
+	                      ng-click="deleteLink($index)" >
+	                      <span class="glyphicon glyphicon-remove"></span>
+	            </button>
+            </td>
+
+        </tbody>
+
+        <tbody ng-repeat-end>
+
+            <td>
+              <input type="text" placeholder="Link title" class="form-control" ng-model="newLink.text"></input>
+            </td>
+
+            <td>
+               <input type="text" placeholder="Link url" class="form-control" ng-model="newLink.url"></input>
+            </td>
+            <td>
+	            <button type="button" 
+	                      class="btn btn-success btn-sm pull-right"
+	                      ng-click="addLink()" >
+	                      <span class="glyphicon glyphicon-ok"></span>
+	            </button>
+            </td>
+            
+        </tbody>
+
+
+      </table>
+
+</div>
+
+</div>

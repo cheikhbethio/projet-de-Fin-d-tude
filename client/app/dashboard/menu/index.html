@@ -1,0 +1,116 @@
+<h2 class="page-header">Gestion du menu</h2>
+
+<alert type="danger" ng-if="user.getRight() == 1"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Vous ne pouvez pas modifier le menu, seul l'administrateur en a les droits.</alert>
+
+<h4 class="page-header"> Aperçu du menu </h4>
+<div class="well">
+	<div class="blog-masthead" id="top-scroll" name="top" ng-style="{ 'background-color': preferences.site.bannercolor }">
+	    <div class="container">
+	        <div class="navbar-header navbar-default blog-masthead ">
+	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-col" aria-expanded="false" aria-controls="navbar">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	        </div>
+
+	        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
+	            <a class="blog-nav-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
+
+	            <span ng-repeat="menu in menus">
+	                <span ng-if="menu.single">
+	                    <a class="blog-nav-item">{{menu.name}}</a>
+	                </span>
+
+
+	                <span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
+	                  <a href class="dropdown-toggle blog-nav-item" dropdown-toggle>
+	                    {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+	                  </a>
+	                  <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;" ng-style="{ 'background-color': preferences.site.bannercolor }">
+	                    <li ng-repeat="drop in menu.dropdown"s>
+	                     <a>{{drop.title}}</a>
+	                    </li>
+	                  </ul>
+	                </span>
+
+	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu($index)" ng-if="user.getRight() == 3">
+  						<span aria-hidden="true">&times;</span>
+					</button>
+				</span>
+
+            	</span>
+
+
+
+	            <button class="btn btn-success" ng-click="showAddMenu()" ng-if="user.getRight() == 3"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
+	        </nav>
+
+
+	        <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+               	<a class="blog-nav-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bienvenue <strong>{{user.currentUser().firstname}}</strong></a>
+                <a class="blog-nav-item" href="javascript:void(0)"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnexion</a>
+            </nav>
+	    </div>
+	</div>
+</div>
+
+
+<div class="col-md-6">
+	<form name="createMenuForm" ng-model="menu" ng-show="boolAdd" novalidate>
+		<h4> Paramétrez votre menu </h4>
+	    <div class="input-group">
+			<span class="input-group-addon">Titre du menu</span>
+	        <input type="text" class="form-control"  placeholder="Titre du menu" ng-model="menu.title" required>
+	    </div>
+
+	    <br/>
+        <div class="form-group" >
+	       	<label class="control-label">Type du menu</label>
+	       	<div class="radio">
+		        <label>
+		            <input type="radio" name="radio" id="radioLink" value="option1" checked="true" ng-click="firstTabSelected = true"> Lien simple
+		        </label>
+		    </div>
+		    <div class="radio">
+		        <label>
+		            <input type="radio" name="radio" id="radioDrop" value="option2" ng-click="firstTabSelected = false"> Dropdown
+		        </label>
+	    	</div>
+        </div>
+        <hr>
+        <div class="form-group" ng-if="firstTabSelected">
+           	<label class="control-label"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Choississez la page</label>
+            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id">
+            	<option value='' disabled selected style='display:none;'>Choisissez une page</option>
+			</select>
+
+			<br/>
+			<button class="btn btn-primary" ng-click="saveMenuSimple()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu simple</button>
+        </div>
+
+        <div ng-if="!firstTabSelected">
+        	<h4>Entrez les sous menus désirés</h4>
+
+        	<div class="form-group" ng-repeat="subMenu in dropdown">
+	        	<div class="input-group">
+				  <span class="input-group-addon">Sous-menu</span>
+				  <input type="text" class="form-control" placeholder="Titre" ng-model="subMenu.title">
+				  	<select class="form-control" ng-model="subMenu.page" ng-options="page._id as page.title for page in pages">
+	            		<option value='' disabled selected style='display:none;'>Choisissez une page</option>
+					</select>
+				</div>
+			</div>
+
+	    	<button  type="button" class="btn btn-xs btn-info" ng-click="addSubMenu()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+
+            <br/><br/>
+			<button class="btn btn-primary" ng-click="saveMenuDropDown()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu DropDown</button>
+        </div>
+
+
+	</form>
+</div>

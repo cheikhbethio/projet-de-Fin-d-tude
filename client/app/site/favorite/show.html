@@ -1,0 +1,18 @@
+<h2 class="page-header">Aperçu de l'article <i>{{article.title}}</i></h2>
+
+<div class="well">
+	<div class="blog-post">
+	        <h2 class="blog-post-title">{{article.title}}</h2>
+	        <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a></p>
+
+	        <div ng-bind-html="article.content"></div>
+
+	        <hr>
+	        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
+	       <div>
+	       		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+	    	</div>
+
+ 
+</div>
+</div>
